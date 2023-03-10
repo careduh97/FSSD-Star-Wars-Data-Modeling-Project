@@ -31,7 +31,7 @@ class Favorites(Base):
     vehicle_id = Column(Integer, ForeignKey('vehicle.id'))
     species_id = Column(Integer, ForeignKey('species.id'))
     film_id = Column(Integer, ForeignKey('film.id'))
-    user = relationship(User)
+    user = relationship("User")
 
 class Character(Base):
     __tablename__ = 'character'
@@ -43,6 +43,7 @@ class Character(Base):
     gender = Column(String(250), nullable=False)
     species_id = Column(Integer, ForeignKey('species.id'))
     planet_id = Column(Integer, ForeignKey('planet.id'))
+    favorites = relationship("Favorites")
 
 class Planet(Base):
     __tablename__ = 'planet'
@@ -54,6 +55,7 @@ class Planet(Base):
     climate = Column(String(250), nullable=False)
     terrain = Column(String(250), nullable=False)
     surface_water = Column(String(250), nullable=False)
+    favorites = relationship("Favorites")
 
 class Vehicle(Base):
     __tablename__ = 'vehicle'
@@ -65,6 +67,7 @@ class Vehicle(Base):
     vehicle_class = Column(String(250), nullable=False)
     manufacturer = Column(String(250), nullable=False)
     cargo_capacity = Column(String(250), nullable=False)
+    favorites = relationship("Favorites")
 
 class Species(Base):
     __tablename__ = 'species'
@@ -76,6 +79,7 @@ class Species(Base):
     designation = Column(String(250), nullable=False)
     average_lifespan = Column(String(250), nullable=False)
     language = Column(String(250), nullable=False)
+    favorites = relationship("Favorites")
 
 class Film(Base):
     __tablename__ = 'film'
@@ -86,6 +90,7 @@ class Film(Base):
     director = Column(String(250), nullable=False)
     producer = Column(String(250), nullable=False)
     release_date = Column(Date(), nullable=False)
+    favorites = relationship("Favorites")
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
